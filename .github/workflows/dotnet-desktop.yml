@@ -39,7 +39,7 @@ jobs:
       env:
         Configuration: ${{ matrix.configuration }}
 
-    - name: Restore the application
+    - name: Build the application
       run: msbuild . /p:Configuration=${{ matrix.configuration }} /p:Platform=x64
       env:
         Configuration: ${{ matrix.configuration }}
@@ -49,5 +49,5 @@ jobs:
       with:
         filename: release.zip
         path: .
-        directory: GoodixTools\bin\${{ matrix.configuration }}\net5.0-windows
+        directory: GoodixTools\bin\${{ matrix.configuration }}
         type: zip
