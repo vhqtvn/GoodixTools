@@ -44,15 +44,7 @@ jobs:
       env:
         Configuration: ${{ matrix.configuration }}
 
-    - name: Zip Release
-      uses: TheDoctor0/zip-release@0.6.2
-      with:
-        filename: release.zip
-        path: .
-        directory: GoodixTools\bin\${{ matrix.configuration }}
-        type: zip
-
     - uses: actions/upload-artifact@v3
       with:
         name: release.zip
-        path: GoodixTools\bin\${{ matrix.configuration }}\release.zip
+        path: GoodixTools\bin\${{ matrix.configuration }}
