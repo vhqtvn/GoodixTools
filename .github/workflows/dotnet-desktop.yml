@@ -51,3 +51,8 @@ jobs:
         path: .
         directory: GoodixTools\bin\${{ matrix.configuration }}
         type: zip
+
+    - uses: actions/upload-artifact@v3
+      with:
+        name: release.zip
+        path: release.zip
