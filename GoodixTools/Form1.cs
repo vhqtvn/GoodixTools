@@ -25,17 +25,19 @@ namespace GoodixTools
         {
             if (device == null)
             {
-                foreach (HidDevice hd in HidDevices.Enumerate())
+                foreach (HidDevice hd in HidDevices.Enumerate(0x27C6))
                 {
-                    if (hd.ToString().Contains("gxt"))
+                    if (hd.Capabilities.UsagePage == -16 && hd.Capabilities.Usage == 1)
                     {
-                        Console.WriteLine(hd.ToString());
+                        Console.WriteLine("Select " + hd.ToString());
+                        device = hd;
                     }
                 }
-                foreach (HidDevice hd in HidDevices.Enumerate(0x27C6, 0x0113))
-                {
-                    if (hd.ToString().Contains("col03")) device = hd;
-                }
+            }
+            if (device == null)
+            {
+                MessageBox.Show("Failed to identify device");
+                return;
             }
             device.OpenDevice(DeviceMode.NonOverlapped, DeviceMode.NonOverlapped, ShareMode.ShareRead | ShareMode.ShareWrite);
             if (!device.IsOpen)
